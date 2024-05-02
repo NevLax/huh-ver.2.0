@@ -12,15 +12,19 @@
     <None Remove="Images\back.png" />
     <None Remove="Images\bar-graph.png" />
     <None Remove="Images\close.png" />
+    <None Remove="Images\excelsc.png" />
     <None Remove="Images\exelf.png" />
     <None Remove="Images\graph.png" />
     <None Remove="Images\graphic.png" />
     <None Remove="Images\jsonf.png" />
+    <None Remove="Images\jsonsc.png" />
     <None Remove="Images\magic-wand.png" />
     <None Remove="Images\pie-chart.png" />
     <None Remove="Images\play.png" />
     <None Remove="Images\polarchart.png" />
+    <None Remove="Images\question.png" />
     <None Remove="Images\refreash.png" />
+    <None Remove="Images\save.png" />
     <None Remove="Images\spline-chart.png" />
     <None Remove="Images\typing.png" />
   </ItemGroup>
@@ -35,6 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.Cells" Version="24.4.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="25.1.41" />
   </ItemGroup>
@@ -43,17 +49,25 @@
     <Resource Include="Images\back.png" />
     <Resource Include="Images\bar-graph.png" />
     <Resource Include="Images\close.png" />
+    <Resource Include="Images\excelsc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\exelf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\graph.png" />
     <Resource Include="Images\graphic.png" />
     <Resource Include="Images\jsonf.png" />
+    <Resource Include="Images\jsonsc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\magic-wand.png" />
     <Resource Include="Images\pie-chart.png" />
     <Resource Include="Images\play.png" />
     <Resource Include="Images\polarchart.png" />
+    <Resource Include="Images\question.png" />
     <Resource Include="Images\refreash.png" />
+    <Resource Include="Images\save.png" />
     <Resource Include="Images\spline-chart.png" />
     <Resource Include="Images\typing.png" />
   </ItemGroup>

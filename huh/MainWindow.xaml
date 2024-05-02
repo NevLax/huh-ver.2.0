@@ -393,6 +393,63 @@
                             </Button.Resources>
                         </Button>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <!--StackPanel for refresh button-->
+                        <StackPanel Name="spRefreash" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed">
+                            <Button Name="btnRefreash" ToolTip="Refesh(Clear all)" BorderThickness="0" Click="btnRefreash_Click" Margin="15,10,10,10"  Background="Transparent">
+                                <StackPanel>
+                                    <Image Source="Images/refreash.png" Width="30"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Grid Background="{TemplateBinding Background}">
+                                                                <ContentPresenter HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"/>
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </StackPanel>
+                        <!--StackPanel for reference tooltip-->
+                        <StackPanel Name="spReference" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed" Margin="15,10,10,10">
+                            <Image Source="Images/question.png" Width="30">
+                                <Image.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel>
+                                                <Label Content="View for Excel file:"/>
+                                                <Image Source="Image/excelsc.png" Width="300" Height="200"/>
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <Label Content="View for Json file:"/>
+                                                <Image Source="Image/jsonsc.png" Width="300" Height="200" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Image.ToolTip>
+                            </Image>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
 
                 <!--StackPanel for manual input-->
@@ -538,51 +595,14 @@
                     </Button>
                 </StackPanel>-->
             
-                <!--StackPanel for refresh button-->
-                <StackPanel Name="spRefreash" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed">
-                    <Button Name="btnRefreash" ToolTip="Refesh(Clear all)" BorderThickness="0" Click="btnRefreash_Click" Margin="15,10,10,10"  Background="Transparent">
-                        <StackPanel>
-                            <Image Source="Images/refreash.png" Width="30"/>
-                        </StackPanel>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Grid Background="{TemplateBinding Background}">
-                                                        <ContentPresenter HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                </StackPanel>
+                
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Name="ChartSP" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Name="spCharts" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
 
             <StackPanel Name="spPieChart" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <syncfusion:SfChart VerticalAlignment="Center" HorizontalAlignment="Center">
-                    
-                    
+                <syncfusion:SfChart Name="cPie">
                     <syncfusion:SfChart.Series>
                         <syncfusion:PieSeries ExplodeIndex="5" EnableAnimation="True" ItemsSource="{Binding graphs}" XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
                         </syncfusion:PieSeries>
@@ -592,8 +612,7 @@
             </StackPanel>
 
             <StackPanel Name="spPolarChart" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <syncfusion:SfChart>
-                   
+                <syncfusion:SfChart Name="cPolar">
                     <syncfusion:SfChart.Series>
                         <syncfusion:PolarSeries DrawType="Area" ItemsSource="{Binding graphs}" XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
                             
@@ -603,7 +622,7 @@
             </StackPanel>
 
             <StackPanel Name="spHChart" Visibility="Collapsed">
-                <syncfusion:SfChart >
+                <syncfusion:SfChart Name="cVertical">
                     <syncfusion:SfChart.PrimaryAxis>
                         <syncfusion:CategoryAxis Header="Name" FontSize="14"/>
                     </syncfusion:SfChart.PrimaryAxis>
@@ -614,40 +633,65 @@
 
                     <syncfusion:SfChart.Series>
                         <syncfusion:BarSeries EnableAnimation="True" ItemsSource="{Binding graphs}" XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
-
                         </syncfusion:BarSeries>
                     </syncfusion:SfChart.Series>
                 </syncfusion:SfChart>
             </StackPanel>
 
             <StackPanel Name="spVChart" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-
-                <syncfusion:SfChart HorizontalAlignment="Center" VerticalAlignment="Bottom">
-
+                <syncfusion:SfChart Name="cHorizontal">
                     <syncfusion:SfChart.PrimaryAxis>
                         <syncfusion:CategoryAxis Header="Name" FontSize="14"/>
                     </syncfusion:SfChart.PrimaryAxis>
-
 
                     <syncfusion:SfChart.SecondaryAxis>
                         <syncfusion:NumericalAxis Header="Value" FontSize="14" Interval="2" />
                     </syncfusion:SfChart.SecondaryAxis>
 
-                    <syncfusion:ColumnSeries  ItemsSource="{Binding graphs}"  XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True" >
+                    <syncfusion:ColumnSeries ItemsSource="{Binding graphs}"  XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True" >
                     </syncfusion:ColumnSeries>
-
                 </syncfusion:SfChart>
-
             </StackPanel>
 
             <StackPanel Name="spSChart" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <syncfusion:SfChart>
+                <syncfusion:SfChart Name="cSpline">
                     <syncfusion:SfChart.Series>
                         <syncfusion:SplineAreaSeries ItemsSource="{Binding graphs}"  XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
-                           
                         </syncfusion:SplineAreaSeries>
                     </syncfusion:SfChart.Series>
                 </syncfusion:SfChart>
+            </StackPanel>
+            
+            <!--Stack Panel for save buttun-->
+            <StackPanel Name="spSaveBtn" Margin="20" HorizontalAlignment="Right" Visibility="Collapsed">
+                <Button Name="btnSave" ToolTip="Next" BorderThickness="0" Click="btnSave_Click" Margin="5"  Background="Transparent" >
+                    <StackPanel>
+                        <Image Source="Images/save.png" Width="60"/>
+                    </StackPanel>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
 
         </StackPanel>

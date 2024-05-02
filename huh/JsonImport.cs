@@ -14,12 +14,12 @@ namespace huh
     {
         public string path;
 
-        public void JI(out ViewGraph graphj)
+        public void JI(out ViewForJson graphj)
         {
             string jsonFile = File.ReadAllText(path);
 
 
-            graphj = JsonConvert.DeserializeObject<ViewGraph>(jsonFile)!;
+            graphj = JsonConvert.DeserializeObject<ViewForJson>(jsonFile)!;
 
         }
     }

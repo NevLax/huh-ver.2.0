@@ -1,8 +1,13 @@
-﻿using Microsoft.Win32;
+﻿using Aspose.Cells;
+using DocumentFormat.OpenXml.Drawing;
+using Microsoft.Win32;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace huh
 {
@@ -26,30 +31,40 @@ namespace huh
         private void btnPChart_Click(object sender, RoutedEventArgs e)
         {
             spExport.Visibility = Visibility.Visible;
-            graph.graphType = "PieChart";
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+            graph.graphType = "Pie";
         }
 
         private void btnHGrahp_Click(object sender, RoutedEventArgs e)
         {
             spExport.Visibility = Visibility.Visible;
-            graph.graphType = "HGraph";
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+            graph.graphType = "Horizontal";
         }
 
         private void btnVGraph_Click(object sender, RoutedEventArgs e)
         {
             spExport.Visibility = Visibility.Visible;
-            graph.graphType = "VGraph";
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+            graph.graphType = "Vertical";
         }
         private void btnPolarChart_Click(object sender, RoutedEventArgs e)
         {
             spExport.Visibility = Visibility.Visible;
-            graph.graphType = "PolarChart";
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+            graph.graphType = "Polar";
         }
 
         private void btnSChart_Click(object sender, RoutedEventArgs e)
         {
             spExport.Visibility = Visibility.Visible;
-            graph.graphType = "SChart";
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+            graph.graphType = "Spline";
         }
 
         private void btnTyping_Click(object sender, RoutedEventArgs e)
@@ -57,27 +72,87 @@ namespace huh
             spManualInput.Visibility = Visibility.Visible;
             spTypyOfDiagram.Visibility = Visibility.Collapsed;
             spExport.Visibility = Visibility.Collapsed;
+            spReference.Visibility = Visibility.Collapsed;
         }
 
-        private void btnExcel_Click(object sender, RoutedEventArgs e)
+        public void GetExcel()
         {
-            
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
             bool? success = openFileDialog.ShowDialog();
             var path = openFileDialog.FileName;
-            if (success == true) 
+            if (success == true)
             {
-                foreach (var item in path)
+                Workbook wb = new Workbook(path);               
+                WorksheetCollection collection = wb.Worksheets;            
+                Worksheet worksheet = collection[0];
+                int rows = worksheet.Cells.MaxDataRow;
+                int cols = worksheet.Cells.MaxDataColumn;
+                //List<ViewForJson> view = new List<ViewForJson>();   
+                //List<ViewGraph> viewGraphs = new List<ViewGraph>();
+                List<GraphField> gr = new List<GraphField>();
+
+                for (int i = 0; i < rows; i++)
                 {
-                    
-                    
+                    for (int j = 0; j < cols; j++)
+                    {
+                        if (worksheet.Cells[0, j].Value != null)
+                        {
+                            GraphField graphField = new GraphField();
+                            
+                            graphField.graphName = worksheet.Cells[i, j].Value.ToString();
+                            try
+                            {
+                                graphField.graphValue = Convert.ToInt32(worksheet.Cells[i + 1, j].Value);
+                                gr.Add(graphField);
+                            }
+                            catch
+                            {
+                                continue;
+                            }
+                        }
+                    }
                 }
+                foreach (var v in path)
+                {
+                    switch (graph.graphType)
+                    {
+                        case "Pie":
+                            spPieChart.Visibility = Visibility.Visible;
+                            this.DataContext = v;
+                            break;
+
+                        case "Vertical":
+                            spVChart.Visibility = Visibility.Visible;
+                            this.DataContext = v;
+                            break;
+
+                        case "Horizontal":
+                            spHChart.Visibility = Visibility.Visible;
+                            this.DataContext = v;
+                            break;
+                        case "Polar":
+                            spPolarChart.Visibility = Visibility.Visible;
+                            this.DataContext = v;
+                            break;
+                        case "Spline":
+                            spSChart.Visibility = Visibility.Visible;
+                            this.DataContext = v;
+                            break;
+                    }
+                }
+
             }
             else { MessageBox.Show("File didnt choose", "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information); }
+
         }
 
-        private void btnJsonf_Click(object sender, RoutedEventArgs e)
+        private void btnExcel_Click(object sender, RoutedEventArgs e)
+        {
+            GetExcel();
+        }
+        public void GetJson()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             JsonImport jsonImport = new JsonImport();
@@ -86,28 +161,28 @@ namespace huh
             if (success == true)
             {
                 jsonImport.path = openFileDialog.FileName;
-                jsonImport.JI(out ViewGraph graphj);
+                jsonImport.JI(out ViewForJson graphj);
                 switch (graph.graphType)
                 {
-                    case "PieChart":
+                    case "Pie":
                         spPieChart.Visibility = Visibility.Visible;
                         this.DataContext = graphj;
                         break;
 
-                    case "VGraph":
+                    case "Vertical":
                         spVChart.Visibility = Visibility.Visible;
                         this.DataContext = graphj;
                         break;
 
-                    case "HGraph":
+                    case "Horizontal":
                         spHChart.Visibility = Visibility.Visible;
                         this.DataContext = graphj;
                         break;
-                    case "PolarChart":
+                    case "Polar":
                         spPolarChart.Visibility = Visibility.Visible;
                         this.DataContext = graphj;
                         break;
-                    case "SChart":
+                    case "Spline":
                         spSChart.Visibility = Visibility.Visible;
                         this.DataContext = graphj;
                         break;
@@ -116,8 +191,9 @@ namespace huh
             else { MessageBox.Show("File didnt choose", "MESSAGE", MessageBoxButton.OK, MessageBoxImage.Information); }
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+        private void btnJsonf_Click(object sender, RoutedEventArgs e)
         {
+            GetJson();
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
@@ -151,25 +227,25 @@ namespace huh
             ViewGraph vgraph = new ViewGraph(graphs);
             switch (graph.graphType)
             {
-                case "PieChart":
+                case "Pie":
                     spPieChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
 
-                case "VGraph":
+                case "Vertical":
                     spVChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
 
-                case "HGraph":
+                case "Horizontal":
                     spHChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
-                case "PolarChart":
+                case "Polar":
                     spPolarChart.Visibility = Visibility.Visible; 
                     this.DataContext = vgraph;
                     break;
-                case "SChart":
+                case "Spline":
                     spSChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
@@ -250,6 +326,30 @@ namespace huh
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             Close();//лицензия <3
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Bitmap(*.bmp)|*.bmp|JPEG(*.jpg,*.jpeg)|*.jpg;*.jpeg|Gif (*.gif)|*.gif|PNG(*.png)|*.png|TIFF(*.tif,*.tiff)|*.tif|All files (*.*)|*.*";
+
+            if (sfd.ShowDialog() == true)
+            {
+
+                //using (Stream fs = sfd.OpenFile()) 
+                //{
+
+                //    .Save(fs, new PngBitmapEncoder());
+
+                //}
+
+            }
+        }
+
+        private void btnReference_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
