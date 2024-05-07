@@ -287,6 +287,149 @@
                     </StackPanel>
                 </StackPanel>
 
+                <!--StackPanel for buttons for Palette-->
+                <StackPanel Name="spPalette" Visibility="Collapsed">
+                    <Label Content="Choose palette for diagram:" FontSize="18" Margin="15,10,10,10"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="btnFloraHues" ToolTip="FloraHues" BorderThickness="0" Click="btnFloraHues_Click" Margin="15,10,10,10"  Background="Transparent">
+                            <StackPanel>
+                                <Image Source="Images/FloraHues.png" Width="40"/>
+                            </StackPanel>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Grid Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                                                                 VerticalAlignment="Center"/>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Name="btnTomotoSpectrum" ToolTip="TomotoSpectrum" BorderThickness="0" Click="btnTomotoSpectrum_Click" Margin="15,10,10,10"  Background="Transparent">
+                            <StackPanel>
+                                <Image Source="/Images/TomatoSpectram.png" Width="40"/>
+                            </StackPanel>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Grid Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center"/>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Name="btnPineapple" ToolTip="Pineapple" BorderThickness="0" Click="btnPineapple_Click" Margin="15,10,10,10"  Background="Transparent">
+                            <StackPanel>
+                                <Image Source="/Images/Pineapple.png" Width="40"/>
+                            </StackPanel>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Grid Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Name="btnAutumnBrights" ToolTip="AutumnBrights" BorderThickness="0" Click="btnAutumnBrights_Click" Margin="15,10,10,10"  Background="Transparent">
+                            <StackPanel>
+                                <Image Source="/Images/AutumnBrights.png" Width="40"/>
+                            </StackPanel>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Grid Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                                                                 VerticalAlignment="Center"/>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                      
+                    </StackPanel>
+                </StackPanel>
+
                 <!--StackPanel with buttons for type of export-->
                 <StackPanel Name="spExport" Visibility="Collapsed">
                     <Label Content="Choose type of exporting data:" FontSize="18" Margin="15,10,10,10"/>
@@ -494,32 +637,8 @@
                     </StackPanel>
 
                     <StackPanel Name="spValue" Visibility="Collapsed">
-                        <!--<StackPanel Orientation="Horizontal">
-                            <Label Content="Enter name of graph:" Foreground="White" FontSize="14" Margin="10" />
-                            <TextBox Name="tbGraphName" Padding="5" Foreground="White" 
-                                     Background="Transparent" BorderBrush="#FFC143" 
-                                     Width="90" Height="30">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="5"/>
-                                    </Style>
-                                </TextBox.Resources>
-                            </TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Enter value of graph:" Foreground="White" FontSize="14" Margin="10" />
-                            <TextBox Name="tbGraphValue" Padding="5" Foreground="White" 
-                                     Background="Transparent" BorderBrush="#FFC143" 
-                                     Width="90" Height="30">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="5"/>
-                                    </Style>
-                                </TextBox.Resources>
-                            </TextBox>-->
-                        <!--</StackPanel>-->
                     </StackPanel>
-
+                    
                     <!--StackPanel for create button-->
                     <StackPanel x:Name="spBtnCreate" Visibility="Collapsed">
                         <Button Name="btnCreate" ToolTip="Create Diagram" BorderThickness="0" Click="btnCreate_Click" Margin="15"  Background="Transparent">
@@ -557,7 +676,7 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-
+                
                 <!--StackPanel for back button-->
                 <!--<StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button Name="btnBack" ToolTip="Back" BorderThickness="0" Click="btnBack_Click" Margin="15,10,10,10"  Background="Transparent">
@@ -593,9 +712,7 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                </StackPanel>-->
-            
-                
+                </StackPanel>-->                
             </StackPanel>
         </StackPanel>
 
@@ -604,7 +721,14 @@
             <StackPanel Name="spPieChart" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <syncfusion:SfChart Name="cPie">
                     <syncfusion:SfChart.Series>
-                        <syncfusion:PieSeries ExplodeIndex="5" EnableAnimation="True" ItemsSource="{Binding graphs}" XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
+                        <syncfusion:PieSeries ExplodeIndex="5"  GroupMode="Angle" GroupTo="30" EnableAnimation="True" ItemsSource="{Binding graphs}" XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
+                            <syncfusion:PieSeries.AdornmentsInfo>
+                                <syncfusion:ChartAdornmentInfo ShowConnectorLine="True" 
+                                              ConnectorHeight="80" 
+                                              ShowLabel="True"                                              
+                                              SegmentLabelContent="LabelContentPath">                                   
+                                </syncfusion:ChartAdornmentInfo>
+                            </syncfusion:PieSeries.AdornmentsInfo>
                         </syncfusion:PieSeries>
                     </syncfusion:SfChart.Series>
 
@@ -632,7 +756,7 @@
                     </syncfusion:SfChart.SecondaryAxis>
 
                     <syncfusion:SfChart.Series>
-                        <syncfusion:BarSeries EnableAnimation="True" ItemsSource="{Binding graphs}" XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
+                        <syncfusion:BarSeries EnableAnimation="True" ItemsSource="{Binding graphs}"  XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
                         </syncfusion:BarSeries>
                     </syncfusion:SfChart.Series>
                 </syncfusion:SfChart>
@@ -648,13 +772,13 @@
                         <syncfusion:NumericalAxis Header="Value" FontSize="14" Interval="2" />
                     </syncfusion:SfChart.SecondaryAxis>
 
-                    <syncfusion:ColumnSeries ItemsSource="{Binding graphs}"  XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True" >
+                    <syncfusion:ColumnSeries ItemsSource="{Binding graphs}" XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True" >
                     </syncfusion:ColumnSeries>
                 </syncfusion:SfChart>
             </StackPanel>
 
             <StackPanel Name="spSChart" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <syncfusion:SfChart Name="cSpline">
+                <syncfusion:SfChart x:Name="cSpline">
                     <syncfusion:SfChart.Series>
                         <syncfusion:SplineAreaSeries ItemsSource="{Binding graphs}"  XBindingPath="graphName" YBindingPath="graphValue" ShowTooltip="True">
                         </syncfusion:SplineAreaSeries>

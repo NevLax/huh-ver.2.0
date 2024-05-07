@@ -1,6 +1,7 @@
 ﻿using Aspose.Cells;
 using DocumentFormat.OpenXml.Drawing;
 using Microsoft.Win32;
+using Syncfusion.UI.Xaml.Charts;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -30,40 +31,30 @@ namespace huh
 
         private void btnPChart_Click(object sender, RoutedEventArgs e)
         {
-            spExport.Visibility = Visibility.Visible;
-            spReference.Visibility = Visibility.Visible;
-            spRefreash.Visibility = Visibility.Visible;
-            graph.graphType = "Pie";
+            spPalette.Visibility = Visibility.Visible;
+            graph.graphType = "Pie";            
         }
 
         private void btnHGrahp_Click(object sender, RoutedEventArgs e)
         {
-            spExport.Visibility = Visibility.Visible;
-            spReference.Visibility = Visibility.Visible;
-            spRefreash.Visibility = Visibility.Visible;
+            spPalette.Visibility = Visibility.Visible;
             graph.graphType = "Horizontal";
         }
 
         private void btnVGraph_Click(object sender, RoutedEventArgs e)
         {
-            spExport.Visibility = Visibility.Visible;
-            spReference.Visibility = Visibility.Visible;
-            spRefreash.Visibility = Visibility.Visible;
+            spPalette.Visibility = Visibility.Visible;
             graph.graphType = "Vertical";
         }
         private void btnPolarChart_Click(object sender, RoutedEventArgs e)
         {
-            spExport.Visibility = Visibility.Visible;
-            spReference.Visibility = Visibility.Visible;
-            spRefreash.Visibility = Visibility.Visible;
+            spPalette.Visibility = Visibility.Visible;  
             graph.graphType = "Polar";
         }
 
         private void btnSChart_Click(object sender, RoutedEventArgs e)
         {
-            spExport.Visibility = Visibility.Visible;
-            spReference.Visibility = Visibility.Visible;
-            spRefreash.Visibility = Visibility.Visible;
+            spPalette.Visibility = Visibility.Visible;
             graph.graphType = "Spline";
         }
 
@@ -77,7 +68,6 @@ namespace huh
 
         public void GetExcel()
         {
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
             bool? success = openFileDialog.ShowDialog();
@@ -107,11 +97,12 @@ namespace huh
                                 graphField.graphValue = Convert.ToInt32(worksheet.Cells[i + 1, j].Value);
                                 gr.Add(graphField);
                             }
-                            catch
+                            catch(Exception ex)
                             {
-                                continue;
+                                MessageBox.Show(ex.ToString());
                             }
                         }
+                       
                     }
                 }
                 foreach (var v in path)
@@ -119,24 +110,27 @@ namespace huh
                     switch (graph.graphType)
                     {
                         case "Pie":
+                            spSaveBtn.Visibility = Visibility.Visible;
                             spPieChart.Visibility = Visibility.Visible;
-                            this.DataContext = v;
+                            this.DataContext = v;                            
                             break;
-
                         case "Vertical":
+                            spSaveBtn.Visibility = Visibility.Visible;
                             spVChart.Visibility = Visibility.Visible;
                             this.DataContext = v;
                             break;
-
                         case "Horizontal":
+                            spSaveBtn.Visibility = Visibility.Visible;
                             spHChart.Visibility = Visibility.Visible;
                             this.DataContext = v;
                             break;
                         case "Polar":
+                            spSaveBtn.Visibility = Visibility.Visible;
                             spPolarChart.Visibility = Visibility.Visible;
                             this.DataContext = v;
                             break;
                         case "Spline":
+                            spSaveBtn.Visibility = Visibility.Visible;
                             spSChart.Visibility = Visibility.Visible;
                             this.DataContext = v;
                             break;
@@ -165,25 +159,33 @@ namespace huh
                 switch (graph.graphType)
                 {
                     case "Pie":
+                        spSaveBtn.Visibility = Visibility.Visible;
                         spPieChart.Visibility = Visibility.Visible;
+                        cPie.ChartColorPalette = graph.graphPalette;
                         this.DataContext = graphj;
                         break;
-
                     case "Vertical":
+                        spSaveBtn.Visibility = Visibility.Visible;
                         spVChart.Visibility = Visibility.Visible;
+                        cVertical.ChartColorPalette = graph.graphPalette;
                         this.DataContext = graphj;
                         break;
-
                     case "Horizontal":
+                        spSaveBtn.Visibility = Visibility.Visible;
                         spHChart.Visibility = Visibility.Visible;
+                        cHorizontal.ChartColorPalette = graph.graphPalette;
                         this.DataContext = graphj;
                         break;
                     case "Polar":
+                        spSaveBtn.Visibility = Visibility.Visible;
                         spPolarChart.Visibility = Visibility.Visible;
+                        cPolar.ChartColorPalette = graph.graphPalette;
                         this.DataContext = graphj;
                         break;
                     case "Spline":
+                        spSaveBtn.Visibility = Visibility.Visible;
                         spSChart.Visibility = Visibility.Visible;
+                        cSpline.ChartColorPalette = graph.graphPalette;
                         this.DataContext = graphj;
                         break;
                 }
@@ -228,24 +230,29 @@ namespace huh
             switch (graph.graphType)
             {
                 case "Pie":
+                    spSaveBtn.Visibility = Visibility.Visible;
                     spPieChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
 
                 case "Vertical":
+                    spSaveBtn.Visibility = Visibility.Visible;
                     spVChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
 
                 case "Horizontal":
+                    spSaveBtn.Visibility = Visibility.Visible;
                     spHChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
                 case "Polar":
+                    spSaveBtn.Visibility = Visibility.Visible;
                     spPolarChart.Visibility = Visibility.Visible; 
                     this.DataContext = vgraph;
                     break;
                 case "Spline":
+                    spSaveBtn.Visibility = Visibility.Visible;
                     spSChart.Visibility = Visibility.Visible;
                     this.DataContext = vgraph;
                     break;
@@ -338,12 +345,28 @@ namespace huh
             if (sfd.ShowDialog() == true)
             {
 
-                //using (Stream fs = sfd.OpenFile()) 
-                //{
-
-                //    .Save(fs, new PngBitmapEncoder());
-
-                //}
+                using (Stream fs = sfd.OpenFile())
+                {
+                    ViewGraph vgraph = new ViewGraph(graphs);
+                    switch (graph.graphType)
+                    {
+                        case "Pie":
+                            cPie.Save(fs, new PngBitmapEncoder());
+                            break;
+                        case "cVertical":
+                            cSpline.Save(fs, new PngBitmapEncoder());
+                            break;
+                        case "cHorizontal":
+                            cSpline.Save(fs, new PngBitmapEncoder());
+                            break;
+                        case "Polar":
+                            cPolar.Save(fs, new PngBitmapEncoder());
+                            break;
+                        case "Spline":
+                            cSpline.Save(fs, new PngBitmapEncoder());
+                            break;
+                    }
+                }
 
             }
         }
@@ -351,6 +374,38 @@ namespace huh
         private void btnReference_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnFloraHues_Click(object sender, RoutedEventArgs e)
+        {
+            graph.graphPalette = "FloraHues";
+            spExport.Visibility = Visibility.Visible;
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+        }
+
+        private void btnTomotoSpectrum_Click(object sender, RoutedEventArgs e)
+        {
+            graph.graphPalette = "TomotoSpectrum";
+            spExport.Visibility = Visibility.Visible;
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+        }
+
+        private void btnPineapple_Click(object sender, RoutedEventArgs e)
+        {
+            graph.graphPalette = "Pineapple";
+            spExport.Visibility = Visibility.Visible;
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
+        }
+
+        private void btnAutumnBrights_Click(object sender, RoutedEventArgs e)
+        {
+            graph.graphPalette = "AutumnBrights";
+            spExport.Visibility = Visibility.Visible;
+            spReference.Visibility = Visibility.Visible;
+            spRefreash.Visibility = Visibility.Visible;
         }
     }
 }
